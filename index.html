@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прогноз урожайности</title>
+</head>
+<body>
+    <img src="" />
+
+    <style>
+    body {
+        background-image: url('https://img.freepik.com/free-photo/autumn-background-dry-grass-defocused-view-against-blue-sky-focus-stalk-reeds-golden-light-sunset-backdrop-splash-idea-nature-background-space-text_166373-2773.jpg?t=st=1727191105~exp=1727194705~hmac=3a8b30cfbfa74e5979a8aa0f066f5a9f7c3ef731fd9c00dee1d2d50b6fbb1203&w=1060'); /* Укажите путь к вашему изображению */
+        background-position: center; /* Центрирует изображение */
+        background-repeat: no-repeat; /* Не повторяет изображение */
+        height: 100%;
+        width: 14000px;
+        margin: 0; /* Убирает отступы по умолчанию */
+        }
+    
+
+
+    </style>
+    <header>
+        
+    </header>
+    <main>
+        <h1>Прогноз урожайности растений</h1>
+        <form method="POST">
+            <label for="country">Страна:</label>
+            <select name="country" id="country" required>
+                {% for country in countries %}
+                    <option value="{{ country }}">{{ country }}</option>
+                {% endfor %}
+            </select><br>
+
+            <label for="item">Растение:</label>
+            <select name="item" id="item" required>
+                {% for item in items %}
+                    <option value="{{ item }}">{{ item }}</option>
+                {% endfor %}
+            </select><br>
+
+            <label for="pesticides">Количество пестицидов (тонн):</label>
+            <input type="number" step="any" name="pesticides" required><br>
+
+            <label for="avg_temp">Средняя температура:</label>
+            <input type="number" step="any" name="avg_temp" required><br>
+
+            <label for="rainfall">Осадки (мм):</label>
+            <input type="number" step="any" name="rainfall" required><br>
+
+            <button type="submit">Получить прогноз</button>
+        </form>
+
+        {% if prediction is not none %}
+            <h2>Прогноз урожайности: {{ prediction }} тонн/гектар убранной площади (на основе xgboost)</h2>
+            <h2>Прогноз урожайности: {{ prediction2 }} тонн/гектар убранной площади (на основе random forest)</h2>
+        {% endif %}
+    </main>
+
+    
+</body>
+</html>
